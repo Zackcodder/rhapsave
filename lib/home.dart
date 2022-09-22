@@ -17,7 +17,11 @@ class Home extends StatelessWidget {
         elevation: 0,
         leading: Icon(Icons.menu_book_sharp, color: Colors.black,),
       ),body: Column(
-        children: [],
+        children: [
+          Container(
+            child: Text('Hello'),
+          )
+        ],
       ),
     );
   }
