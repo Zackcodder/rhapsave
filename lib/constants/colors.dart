@@ -11,6 +11,6 @@ const kverfiyColor = Color(0xffB2B3B3);
 const kNavibuttonColor = Color(0xff828282);
 const kBodyColor = Color(0xff484848);
 
-const kButtontextColor = Color(0xffF5F5F5);
+const kNormaltextColor = Color(0xff26202C);
 // const kSecndaryColor = Color(0xff52575C);
 

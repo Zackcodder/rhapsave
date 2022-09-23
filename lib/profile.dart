@@ -75,12 +75,12 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
                                   ),
-                                  blurRadius: 30.0)
+                                  blurRadius: 60.0)
                             ]),
                         child: Row(
                           children: [
@@ -125,12 +125,12 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
                                   ),
-                                  blurRadius: 30.0)
+                                  blurRadius: 60.0)
                             ]),
                         child: Row(
                           children: [
@@ -179,12 +179,12 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
                                   ),
-                                  blurRadius: 30.0)
+                                  blurRadius: 60.0)
                             ]),
                         child: Row(
                           children: [
@@ -233,12 +233,12 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
                                   ),
-                                  blurRadius: 30.0)
+                                  blurRadius: 60.0)
                             ]),
                         child: Row(
                           children: [
@@ -287,12 +287,12 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
                                   ),
-                                  blurRadius: 30.0)
+                                  blurRadius: 60.0)
                             ]),
                         child: Row(
                           children: [
@@ -341,7 +341,7 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
@@ -394,7 +394,7 @@ class Profile extends StatelessWidget {
                             color: kCircleColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: Color(0xff000000).withOpacity(0.5),
+                                  color: Color(0xff000000).withOpacity(0.05),
                                   offset: Offset(
                                     0,
                                     30,
@@ -498,6 +498,6 @@ class Profile extends StatelessWidget {
       ),
       bottomNavigationBar: ReuseableBottomBar(),
     );
-    ;
+    
   }
 }
