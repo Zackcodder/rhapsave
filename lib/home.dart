@@ -12,66 +12,319 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackground,
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          title: Center(
-              child: Text(
-            'Create Rhapsave',
-            style: TextStyle(
-                color: kNewHeaderColor,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Poppins',
-                fontSize: 16.0,
-                fontStyle: FontStyle.normal),
-          )),
-          toolbarHeight: 60,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Icon(
-            FontAwesomeIcons.angleLeft,
-            size: 20,
-            color: kGeneralbodytextColor,
+      backgroundColor: kBackground,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Center(
+            child: Text(
+          'Create Rhapsave',
+          style: TextStyle(
+              color: kNewHeaderColor,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Poppins',
+              fontSize: 16.0,
+              fontStyle: FontStyle.normal),
+        )),
+        toolbarHeight: 60,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Icon(
+          FontAwesomeIcons.angleLeft,
+          size: 20,
+          color: kGeneralbodytextColor,
+        ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 76,
+            child: Image.asset(
+              'assets/images/header.png',
+              fit: BoxFit.fitWidth,
+            ),
           ),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 76,
-              child: Image.asset(
-                'assets/images/header.png',
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 24, right: 24, top: 40),
-              decoration: BoxDecoration(
-                  // image: DecorationImage(
-                  //   // alignment: Alignment.topLeft,
-                  //   image: AssetImage('assets/images/dcard.png',),
-                  //   fit: BoxFit.fitWidth
-                  //   ),
-                  color: kCircleColor.withOpacity(0.0),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0xff000000).withOpacity(0.5),
-                        offset: Offset(
-                          0,
-                          30,
+          Container(
+            height: 148,
+            margin: EdgeInsets.only(left: 24, right: 24, top: 40),
+            decoration: BoxDecoration(color: kCircleColor, boxShadow: [
+              BoxShadow(
+                  color: Color(0xff000000).withOpacity(0.05),
+                  offset: Offset(
+                    0,
+                    30,
+                  ),
+                  blurRadius: 60.0)
+            ]),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 15, top: 20, right: 10),
+                        height: 80,
+                        width: 178,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            Container(
+                              height: 18,
+                              child: Text(
+                                'Rhapsave saving',
+                                style: TextStyle(
+                                    color: kCardheadertextColor,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12.0,
+                                    fontStyle: FontStyle.normal),
+                              ),
+                            ),
+                            Container(
+                              height: 30,
+                              child: Text(
+                                'N 1,000,000',
+                                style: TextStyle(
+                                    color: kCardheadertextColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 24.0,
+                                    fontStyle: FontStyle.normal),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                height: 13,
+                                child: Text(
+                                  'Save automatically towards a several goals.',
+                                  style: TextStyle(
+                                      color: kNavibuttonColor,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 12.0,
+                                      fontStyle: FontStyle.normal),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                        blurRadius: 60.0)
-                  ]),
-              child: Image.asset(
-                'assets/images/dcard.png',
-                height: 148,
-                width: 327,
-                fit: BoxFit.fitWidth,
-              ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, right: 15),
+                      height: 80,
+                      width: 80,
+                      child: Image.asset('assets/images/pie.png'),
+                    )
+                  ],
+                ),
+                Container(
+                  // color: kBodyColor,
+                  margin: EdgeInsets.only(left: 15, right: 10, top: 10),
+                  height: 12,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 12,
+                        width: 60,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffFFB531),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'Car Saving',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                      
+                      
+                      Container(
+                        height: 12,
+                        // width: 70,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffFF9D78),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'Mortage Savings',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                      
+                      
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        height: 12,
+                        width: 60,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffF64F00),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'School Fees ',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 12,
+                        // width: 72,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffFFB531),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'Christmas Savings',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      )
+                    
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 45, right: 35, top: 10),
+                  height: 12,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 12,
+                        width: 60,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffFFB531),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'Car Saving',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                      
+                      Container(
+                        height: 12,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffFF9D78),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'Mortage Savings',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                     
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        height: 12,
+                        width: 60,
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 4,
+                              backgroundColor: Color(0xffF64F00) ,
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              'School Fees ',
+                              style: TextStyle(
+                                  color: kNavibuttonColor,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 8.0,
+                                  fontStyle: FontStyle.normal),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: ReuseableBottomBar(),
-        );
+          ),
+        ],
+      ),
+      bottomNavigationBar: ReuseableBottomBar(),
+    );
   }
 }

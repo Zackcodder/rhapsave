@@ -10,7 +10,8 @@ const kCircleColor = Color(0xffFFFFFF);
 const kverfiyColor = Color(0xffB2B3B3);
 const kNavibuttonColor = Color(0xff828282);
 const kBodyColor = Color(0xff484848);
-
 const kNormaltextColor = Color(0xff26202C);
+const kCardheadertextColor = Color(0xff1C1939);
+
 // const kSecndaryColor = Color(0xff52575C);
 
