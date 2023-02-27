@@ -1,14 +1,30 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:aad_oauth/aad_oauth.dart';
+import 'package:aad_oauth/model/config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rhapsave/constants/colors.dart';
 import 'package:rhapsave/constants/text_style.dart';
 import 'package:rhapsave/reuseable_bottom_navbar.dart';
 
-class Profile extends StatelessWidget {
+import 'signin.dart';
+
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  late AadOAuth oauth = AadOAuth(config);
+  late Config config;
+  
+  void logout() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
+    await oauth.logout();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -435,6 +451,32 @@ class Profile extends StatelessWidget {
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                      //Logout
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30.0, 30.0, 30.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Color.fromARGB(255, 20, 118, 197)
+                              .withOpacity(1.0),
+                          elevation: 10.0,
+                          child: MaterialButton(
+                            onPressed: () {
+                              logout();
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) => Home()));
+                            },
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: const Text(
+                              "SSO Logout",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
