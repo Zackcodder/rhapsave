@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rhapsave/constants/colors.dart';
 import 'package:rhapsave/constants/text_style.dart';
+import 'package:rhapsave/main.dart';
 import 'package:rhapsave/reuseable_bottom_navbar.dart';
 
 import 'signin.dart';
@@ -18,13 +19,45 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  late AadOAuth oauth = AadOAuth(config);
-  late Config config;
+
+    void showError(dynamic ex) {
+    showMessage(ex.toString());
+  }
+
+  void showMessage(String text) {
+    var alert = AlertDialog(content: Text(text), actions: <Widget>[
+      ElevatedButton(
+          child: const Text('Ok'),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SignIn()));
+                // Navigator.pop(context);
+
+          })
+    ]);
+    showDialog(context: context, builder: (BuildContext context) => alert);
+  }
   
   void logout() async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
     await oauth.logout();
+    showMessage('Logout ?');
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
+    
   }
+  var config = Config(
+        tenant: '6762e8f8-825b-400d-961f-f010c25b02f5',
+        clientId: '906cfb22-37b0-47b1-a15c-3b42a60460e8',
+        scope: 'openid profile offline_access User.read',
+        navigatorKey: navigatorKey,
+        // redirectUri: '$redirectUri',
+        loader: Center(child: CircularProgressIndicator()),
+        isB2C: false,
+        domainHint: "consumer");
+        late AadOAuth oauth = AadOAuth(config);
+
+  
+
+  // late Config config;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -463,7 +496,7 @@ class _ProfileState extends State<Profile> {
                           elevation: 10.0,
                           child: MaterialButton(
                             onPressed: () {
-                              logout();
+                             logout();
                               // Navigator.push(context,
                               //     MaterialPageRoute(builder: (context) => Home()));
                             },

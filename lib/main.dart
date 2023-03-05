@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:rhapsave/home.dart';
 // My OWn Package
 import 'package:rhapsave/signin.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
         primaryColor: Colors.blue,
       ),
-      home: SignIn(),
+      home: Authenticate(),
       // !autoLogin ? SignIn() : Home(),
       // SignIn(),
 
