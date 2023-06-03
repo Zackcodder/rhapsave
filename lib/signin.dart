@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // My own package
 
@@ -10,6 +11,8 @@ import 'package:rhapsave/home.dart';
 import 'package:aad_oauth/aad_oauth.dart';
 import 'package:aad_oauth/model/config.dart';
 import 'package:rhapsave/main.dart';
+import 'package:local_auth/local_auth.dart';
+import 'package:rhapsave/scanner.dart';
 
 // final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -144,8 +147,6 @@ class _SignInState extends State<SignIn> {
       // "Authorization": "Bearer",
       "Content-Type": "application/json",
     });
-
-    
 
     // print(response.body);
     print(email);
@@ -329,8 +330,8 @@ class _SignInState extends State<SignIn> {
   // //     if (accessToken != null) {
 
   // //     print(accessToken);
-  // //       Navigator.push(
-  // //           context, MaterialPageRoute(builder: (context) => Home()));
+  // Navigator.push(
+  //     context, MaterialPageRoute(builder: (context) => Home()));
   // //       showMessage('Login Successfully');
   // //     } else if (accessToken == null) {
   // //       Navigator.push(
@@ -374,6 +375,171 @@ class _SignInState extends State<SignIn> {
     return exitApp ?? false;
   }
 
+  // late final LocalAuthentication auth;
+  // bool _supportState = false;
+
+  //function to get available thumbprint
+  // Future<void> _getAvailableBiometrics() async {
+  //   List<BiometricType> availableBiometrics =
+  //       await auth.getAvailableBiometrics();
+  //   if (!mounted) {
+  //     return;
+  //   }
+  // }
+
+  // //function to authenticate using finger print
+  // Future<void> _authenticate() async {
+  //   try {
+  //     bool authenticated = await auth.authenticate(
+  //       localizedReason: 'localizedReason',
+  //       options: const AuthenticationOptions(
+  //         stickyAuth: true,
+  //         biometricOnly: true,
+  //       ),
+  //     );
+  //   } on PlatformException catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // second code
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
+  }
+
+  // Future<void> _checkBiometrics() async {
+  //   late bool canCheckBiometrics;
+  //   try {
+  //     canCheckBiometrics = await auth.canCheckBiometrics;
+  //   } on PlatformException catch (e) {
+  //     canCheckBiometrics = false;
+  //     print(e);
+  //   }
+  //   if (!mounted) {
+  //     return;
+  //   }
+
+  //   setState(() {
+  //     _canCheckBiometrics = canCheckBiometrics;
+  //   });
+  // }
+
+  Future<void> _getAvailableBiometrics() async {
+    late List<BiometricType> availableBiometrics;
+    try {
+      availableBiometrics = await auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      availableBiometrics = <BiometricType>[];
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _availableBiometrics = availableBiometrics;
+    });
+  }
+
+  Future<void> _authenticate() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Scanner()));
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'SignIn with FingerPrint',
+        options:
+            const AuthenticationOptions(stickyAuth: true, biometricOnly: false,),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
+  // Future<void> _authenticateWithBiometrics() async {
+  //   bool authenticated = false;
+  //   try {
+  //     setState(() {
+  //       _isAuthenticating = true;
+  //       _authorized = 'Authenticating';
+  //     });
+  //     authenticated = await auth.authenticate(
+  //       localizedReason:
+  //           'Scan your fingerprint (or face or whatever) to authenticate',
+  //       options: const AuthenticationOptions(
+  //         stickyAuth: true,
+  //         biometricOnly: true,
+  //       ),
+  //     );
+  //     setState(() {
+  //       _isAuthenticating = false;
+  //       _authorized = 'Authenticating';
+  //     });
+  //   } on PlatformException catch (e) {
+  //     print(e);
+  //     setState(() {
+  //       _isAuthenticating = false;
+  //       _authorized = 'Error - ${e.message}';
+  //     });
+  //     return;
+  //   }
+  //   if (!mounted) {
+  //     return;
+  //   }
+
+  //   final String message = authenticated ? 'Authorized' : 'Not Authorized';
+  //   setState(() {
+  //     _authorized = message;
+  //   });
+  // }
+
+  // Future<void> _cancelAuthentication() async {
+  //   await auth.stopAuthentication();
+  //   setState(() => _isAuthenticating = false);
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   auth = LocalAuthentication();
+  //   auth.isDeviceSupported().then((bool isSupported) {
+  //     setState(() {
+  //       _supportState = isSupported;
+  //     });
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -397,7 +563,7 @@ class _SignInState extends State<SignIn> {
                           padding:
                               const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 10.0),
                           child: Text(
-                            'Azure Login',
+                            'Finger print Login',
                             style: TextStyle(
                                 color: Colors.orange,
                                 fontWeight: FontWeight.bold,
@@ -452,39 +618,45 @@ class _SignInState extends State<SignIn> {
                         ),
 
                         //Signin Button
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              30.0, 30.0, 200.0, 30.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: Color.fromARGB(255, 20, 118, 197)
-                                .withOpacity(1.0),
-                            elevation: 10.0,
-                            child: MaterialButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  signin(
-                                  email: _emailTextController.text,
-                                );
-                                }
-                                
-                                // login(true);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Home()));
-                              },
-                              minWidth: MediaQuery.of(context).size.width,
-                              child: const Text(
-                                "Login",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            //Login Button
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  30.0, 30.0, 30.0, 10.0),
+                              child: Material(
+                                borderRadius: BorderRadius.circular(5.0),
+                                color: Color.fromARGB(255, 20, 118, 197)
+                                    .withOpacity(1.0),
+                                elevation: 10.0,
+                                child: MaterialButton(
+                                  onPressed: _getAvailableBiometrics,
+                                  // ()async {
+                                  // if (_formKey.currentState!.validate()) {
+                                  //   signin(
+                                  //     email: _emailTextController.text,
+                                  //   );
+                                  // },},
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: const Text(
+                                    "Login",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                            // Finger Print Button
+                            IconButton(
+                              onPressed: _authenticate,
+                              icon: Icon(Icons.fingerprint_sharp,
+                                  size: 45, color: Colors.blue),
+                            )
+                          ],
                         ),
 
                         //SignOut
@@ -601,6 +773,12 @@ class _SignInState extends State<SignIn> {
       // ),
     );
   }
+}
+
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }
 
 // First working method

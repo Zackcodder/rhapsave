@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rhapsave/home.dart';
+import 'package:rhapsave/scanner.dart';
 // My OWn Package
 import 'package:rhapsave/signin.dart';
 
@@ -19,7 +20,7 @@ final navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   // final bool autoLogin;
   //this.autoLogin,
-  const MyApp( {Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         primaryColor: Colors.blue,
       ),
-      home: Authenticate(),
+      home: SignIn(),
       // !autoLogin ? SignIn() : Home(),
       // SignIn(),
 
